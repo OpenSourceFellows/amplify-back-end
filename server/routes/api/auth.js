@@ -1,17 +1,18 @@
+require('dotenv').config()
 const express = require("express");
 const axios = require("axios");
+const { requiresAuth } = require('express-openid-connect');
 const router = express.Router();
-require('dotenv').config()
-const { auth } = require('express-openid-connect');
 
-app.use(
-  auth({
-    issuerBaseURL: process.env.ISSUER_BASE_URL,
-    baseURL: process.env.BASE_URL,
-    clientID: process.env.CLIENT_ID,
-    secret: process.env.SECRET,
-    idpLogout: true,
-  })
-);
+router.get('/locked', (req, res) => {
+  res.send(  "Oh no! Route is not locked"  )
+})
 
-//temporarily removed export until auth is working
+router.get('/unlocked', (req, res) => {
+  res.send("Success! Route is not locked")    
+})
+
+router.get('/login', (req, res) => res.oidc.login({ returnTo: '/profile' }));
+
+module.exports = router
+  
