@@ -7,9 +7,9 @@ require('dotenv').config()
 
 // Get
 router.get('/:zipCode', (req, res) => {
-    var congressMembers = []
-    var reps = []
-    var zipCode = req.params.zipCode
+    const congressMembers = []
+    let reps = []
+    const zipCode = req.params.zipCode
 
     axios
         .get('https://www.googleapis.com/civicinfo/v2/representatives', {
@@ -23,8 +23,8 @@ router.get('/:zipCode', (req, res) => {
             response.data.offices.forEach((repInfo) => {
                 repInfo.officialIndices.forEach((position) => {
                     if (position > 1) {
-                        var rep = reps[position]
-                        var officeInfo = {
+                        const rep = reps[position]
+                        let officeInfo = {
                             name: '',
                             title: '',
                             city: '',
@@ -99,7 +99,7 @@ function CheckUndefined(itemToCheck, repInfo) {
 }
 
 router.get('/', (req, res) => {
-    var campaigns = [
+    const campaigns = [
         {
             name_of_org: 'M4BL',
             name: 'The Breathe Act',
