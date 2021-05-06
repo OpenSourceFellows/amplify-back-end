@@ -26,11 +26,3 @@ describe('/api/amplify/', () => {
         expect(response.status).toBe(200)
     })
 })
-
-describe('/api/auth/unlocked', () => {
-    const route = '/api/auth/unlocked'
-    test('returns 200 status', async () => {
-        const response = await request(app).get(route)
-        expect(response.status).toBe(200)
-    })
-})
