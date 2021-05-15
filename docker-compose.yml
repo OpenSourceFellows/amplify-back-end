@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: ./
+      target: dev
+    volumes:
+      - .:/src
+    command: npm run dev
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: development
+      ISSUER_BASE_URL: "https://YOUR_AUTH_DOMAIN"
+      CLIENT_ID: YOUR_CLIENT_ID
+      BASE_URL: "https://localhost:5000/"
+      SECRET: LONG_RANDOM_VALUE
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: pe_dev
+      POSTGRES_PASSWORD: pe_dev
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+

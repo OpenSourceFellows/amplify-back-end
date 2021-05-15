@@ -40,11 +40,13 @@ const baseConfig = {
 
 // Export the configuration matrix
 module.exports = {
-
   development: {
     ...baseConfig,
     connection: {
-      database: 'pe_dev'
+      database: 'pe_dev',
+      user: 'pe_dev',
+      password: 'pe_dev',
+      host: 'db'
     }
   },
 
