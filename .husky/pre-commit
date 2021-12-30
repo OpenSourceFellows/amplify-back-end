@@ -1,4 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged --verbose
+# Using `--no-stash` prevents reverting modifications in case of errors.
+#
+# This avoids edge cases where the only staged modifications are those that
+# would be effectively reverted by the `lint-staged` tasks (e.g. `eslint`,
+# `prettier`, etc.)
+#
+# WARNING: It is, however, add some risk if those same `lint-staged` tasks were
+# to legitimately err and cause bigger issues, but this is highly unlikely.
+npx lint-staged --verbose --no-stash
