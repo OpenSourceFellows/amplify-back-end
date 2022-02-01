@@ -4,7 +4,7 @@ const Lob = require('lob')
 
 const router = express.Router()
 
-const ALLOWED_ADDRESS_FIELDS = ['line1', 'line2', 'city', 'state', 'zip']
+const ALLOWED_ADDRESS_FIELDS = ['address_line1', 'address_line2', 'address_city', 'address_state', 'address_zip']
 const VALID_US_ZIP_CODE_MATCH = /^(?:\d{1,4}|\d{5}(?:[+-]?\d{4})?)$/
 const DELIVERABILITY_WARNINGS = {
   undeliverable: 'Address is not deliverable',
@@ -127,11 +127,11 @@ router.post('/addressVerification', async (req, res) => {
       )
     }
 
-    if (!(address.line1 || '').trim()) {
-      throw new Error('Address object must contain a primary line (line1)')
+    if (!(address.address_line1 || '').trim()) {
+      throw new Error('Address object must contain a primary line')
     }
 
-    const { zip } = address
+    const { address_zip: zip } = address
     if (zip != null && typeof zip !== 'string') {
       throw new Error('Address object must contain a string-based ZIP code')
     }
@@ -143,7 +143,7 @@ router.post('/addressVerification', async (req, res) => {
           `Address object contained an invalid ZIP code: ${zipCode}`
         )
       }
-    } else if (!((address.city || '').trim() && (address.state || '').trim())) {
+    } else if (!((address.address_city || '').trim() && (address.address_state || '').trim())) {
       throw new Error(
         'Address object must include both city and state, or a ZIP code'
       )
@@ -152,7 +152,13 @@ router.post('/addressVerification', async (req, res) => {
     return res.status(400).send({ error: validationError.message })
   }
 
-  const { line1, line2, city, state, zip } = address
+  const {
+    address_line1: line1,
+    address_line2: line2,
+    address_city: city,
+    address_state: state,
+    address_zip: zip
+  } = address
   // Ensure the ZIP code is at least 5 digits
   const zipCode = zip ? zip.padStart(5, '0') : null
 
@@ -209,11 +215,11 @@ router.post('/addressVerification', async (req, res) => {
       deliverable,
       warning,
       revisedAddress: {
-        line1: revisedLine1,
-        line2: revisedLine2 || null,
-        city: revisedCity,
-        state: revisedState,
-        zip: revisedZip + (revisedZipPlus4 ? '-' + revisedZipPlus4 : '')
+        address_line1: revisedLine1,
+        address_line2: revisedLine2 || null,
+        address_city: revisedCity,
+        address_state: revisedState,
+        address_zip: revisedZip + (revisedZipPlus4 ? '-' + revisedZipPlus4 : '')
       }
     })
   } catch (error) {

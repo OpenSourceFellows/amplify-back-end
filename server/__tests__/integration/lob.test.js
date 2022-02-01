@@ -130,17 +130,17 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 200 status for an address meeting all requirements', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'residential house', zip })
+      .send({ address_line1: 'residential house', address_zip: zip })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       deliverable: true,
       warning: null,
       revisedAddress: {
-        line1: '1709 BRODERICK ST',
-        line2: null,
-        city: 'SAN FRANCISCO',
-        state: 'CA',
-        zip: '94115-2525'
+        address_line1: '1709 BRODERICK ST',
+        address_line2: null,
+        address_city: 'SAN FRANCISCO',
+        address_state: 'CA',
+        address_zip: '94115-2525'
       }
     })
   })
@@ -158,17 +158,17 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 200 status for a residential house', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'residential house', zip })
+      .send({ address_line1: 'residential house', address_zip: zip })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       deliverable: true,
       warning: null,
       revisedAddress: {
-        line1: '1709 BRODERICK ST',
-        line2: null,
-        city: 'SAN FRANCISCO',
-        state: 'CA',
-        zip: '94115-2525'
+        address_line1: '1709 BRODERICK ST',
+        address_line2: null,
+        address_city: 'SAN FRANCISCO',
+        address_state: 'CA',
+        address_zip: '94115-2525'
       }
     })
   })
@@ -176,16 +176,16 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 200 status for residential highrise', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'residential highrise', zip })
+      .send({ address_line1: 'residential highrise', address_zip: zip })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
-        city: 'SAN FRANCISCO',
-        line1: '660 KING ST UNIT 305',
-        line2: null,
-        state: 'CA',
-        zip: '94107-1539'
+        address_line1: '660 KING ST UNIT 305',
+        address_line2: null,
+        address_city: 'SAN FRANCISCO',
+        address_state: 'CA',
+        address_zip: '94107-1539'
       },
       warning: null
     })
@@ -194,16 +194,16 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 200 status for residential department of state', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'department of state', zip })
+      .send({ address_line1: 'department of state', address_zip: zip })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
-        city: 'DPO',
-        line1: 'UNIT 8900 BOX 4301',
-        line2: null,
-        state: 'AE',
-        zip: '09831-4301'
+        address_line1: 'UNIT 8900 BOX 4301',
+        address_line2: null,
+        address_city: 'DPO',
+        address_state: 'AE',
+        address_zip: '09831-4301'
       },
       warning: null
     })
@@ -212,16 +212,16 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 200 status for residential military', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'military', zip })
+      .send({ address_line1: 'military', address_zip: zip })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
-        city: 'APO',
-        line1: 'CMR 409 BOX 145',
-        line2: null,
-        state: 'AE',
-        zip: '09053-0002'
+        address_line1: 'CMR 409 BOX 145',
+        address_line2: null,
+        address_city: 'APO',
+        address_state: 'AE',
+        address_zip: '09053-0002'
       },
       warning: null
     })
@@ -230,16 +230,16 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 200 status with warning for residence with unnecessary unit', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'unnecessary unit', zip })
+      .send({ address_line1: 'unnecessary unit', address_zip: zip })
     expect(response.status).toBe(200)
     expect(response.body).toEqual({
       deliverable: true,
       revisedAddress: {
-        city: 'SAN FRANCISCO',
-        line1: '1709 BRODERICK ST APT 505',
-        line2: null,
-        state: 'CA',
-        zip: '94115-2525'
+        address_line1: '1709 BRODERICK ST APT 505',
+        address_line2: null,
+        address_city: 'SAN FRANCISCO',
+        address_state: 'CA',
+        address_zip: '94115-2525'
       },
       warning:
         'Address may be deliverable but contains an unnecessary suite number'
@@ -249,7 +249,7 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 400 status for residential post office box', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'po box', zip })
+      .send({ address_line1: 'po box', address_zip: zip })
     expect(response.status).toBe(400)
     expect(response.body).toEqual({
       error: 'Post office boxes are not currently supported'
@@ -259,7 +259,7 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 400 status for residence in Puerto Rico', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'puerto rico', zip })
+      .send({ address_line1: 'puerto rico', address_zip: zip })
     expect(response.status).toBe(400)
     expect(response.body).toEqual({
       error: 'Puerto Rico addresses are not currently supported'
@@ -269,7 +269,7 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 400 status for commercial building', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'deliverable', zip })
+      .send({ address_line1: 'deliverable', address_zip: zip })
     expect(response.status).toBe(400)
     expect(response.body).toEqual({
       error: 'Non-residential addresses are not currently supported'
@@ -279,7 +279,7 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 400 status for commercial highrise', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'commercial highrise', zip })
+      .send({ address_line1: 'commercial highrise', address_zip: zip })
     expect(response.status).toBe(400)
     expect(response.body).toEqual({
       error: 'Non-residential addresses are not currently supported'
@@ -289,7 +289,7 @@ describe('POST /api/lob/addressVerification', () => {
   test('returns 400 status for undeliverable address', async () => {
     const response = await request(app)
       .post(route)
-      .send({ line1: 'undeliverable block match', zip })
+      .send({ address_line1: 'undeliverable block match', address_zip: zip })
     expect(response.status).toBe(400)
     expect(response.body).toEqual({ error: 'Address is undeliverable' })
   })
