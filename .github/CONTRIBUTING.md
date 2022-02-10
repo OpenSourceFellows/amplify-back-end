@@ -263,7 +263,7 @@ NODE_ENV=production npm start
 
 ### Branching-Recommendation
 
-This is a simple way to identify feature branches and branch owners
+This is a simple way to organize feature branches and branch owners
 
 #### Branch Naming Convention
 
