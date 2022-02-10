@@ -1,6 +1,6 @@
 # Contributing
 
-[:open_file_folder: Dev Environment Setup](#Setup)&nbsp;&nbsp;&nbsp; [:open_file_folder: Branching](#Branching-Recommendation)
+[:open_file_folder: Dev Environment Setup](#Setup)&nbsp;&nbsp;&nbsp; [:open_file_folder: Branching](#Branching-Recommendation)&nbsp;&nbsp;&nbsp; [:open_file_folder: Pull Request Handling](#Pull-Requests)
 
 ## For Developers
 
@@ -283,3 +283,9 @@ This is a simple way to organize feature branches and branch owners
     
 > Note: Branches should be short lived! To **prevent a branching mess**, please delete your branch as soon as your PR was successfully merged 🙏
     
+---
+
+### Pull-Requests
+
+Please the `Link the Issues` that the code changes are based on `to your Pull Request` (PR). 
+Any successful merge of the PR will automtically resolve the linked `Issues`.
