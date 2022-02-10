@@ -263,6 +263,8 @@ NODE_ENV=production npm start
 
 This is a simple way to identify feature branches and branch owners
 
+---
+
 #### Branch Naming Convention
 
 - Personal branch example (for anything that you consider 'your own')
