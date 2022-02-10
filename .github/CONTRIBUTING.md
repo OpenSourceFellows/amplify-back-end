@@ -259,11 +259,11 @@ DATABASE_URL=<OUR_HEROKU_DATABASE_URL>
 NODE_ENV=production npm start
 ```
 
+---
+
 ### Branching-Recommendation
 
 This is a simple way to identify feature branches and branch owners
-
----
 
 #### Branch Naming Convention
 
