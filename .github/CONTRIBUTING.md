@@ -1,5 +1,7 @@
 # Contributing
 
+[:open_file_folder: Dev Environment Setup](#Setup)&nbsp;&nbsp;&nbsp; [:open_file_folder: Branching](#Branching-Recommendation)
+
 ## For Developers
 
 ### Setup
@@ -11,6 +13,7 @@
 You can learn more about using Codespaces from the [official GitHub documentation](https://docs.github.com/codespaces).
 
 :information_source: When using the Codespaces environment, you should be provided all of the environment variables necessary to get up and running. However, if you find that any of them are not working as expected (please let us know!), you may need to manually update some of them via directions in the [Configuration](#configuration) section below.
+
 
 #### Using a Docker environment
 
@@ -255,3 +258,26 @@ DATABASE_URL=<OUR_HEROKU_DATABASE_URL>
 ```shell
 NODE_ENV=production npm start
 ```
+
+### Branching-Recommendation
+
+This is a simple way to identify feature branches and branch owners
+
+#### Branch Naming Convention
+
+- Personal branch example (for anything that you consider 'your own')
+  `<github-handle>/feature` 
+  
+- Feature branch examples
+  - The top level feature  
+    `<feature>/<github-handle>`
+    
+  - A sub topic of that feature    
+    `<feature>/<sub-topic>`
+    
+  - Sub topics that you want to contribute to 
+
+    `<feature>/<sub-topic>/<github-handle>`
+    
+> Note: Branches should be short lived! To **prevent a branching mess**, please delete your branch as soon as your PR was successfully merged 🙏
+    
